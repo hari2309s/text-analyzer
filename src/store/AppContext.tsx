@@ -1,5 +1,9 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { getCharactersCount, getPronounsCount } from '../helper.ts';
+import {
+    getPronounsCount,
+    removeEmptyItems,
+    removeLineBreaks,
+} from '../helper.ts';
 
 interface AnalyzedValues {
     words: number;
@@ -54,17 +58,15 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
             setAnalyzedValues((values) => ({
                 ...values,
                 words: text.split(' ').length,
-                characters: getCharactersCount(text.trim().split(' ')),
-                sentences: text.includes('.') ? text.split('.').length : 0,
-                paragraphs:
-                    text.includes('.') &&
-                        text.split('.').length >= text.split(/\r\n|\r|\n/).length
-                        ? text.split(/\r\n|\r|\n/).length
-                        : 0,
+                characters: text.length,
+                sentences: removeEmptyItems(removeLineBreaks(text.split('.')))
+                    .length,
+                paragraphs: removeEmptyItems(text.trim().split(/\r?\n|\r/))
+                    .length,
                 pronouns: getPronounsCount(text),
             }));
         } else {
-            setAnalyzedValues(initialAnalyzedValues)
+            setAnalyzedValues(initialAnalyzedValues);
         }
     }, [text]);
 

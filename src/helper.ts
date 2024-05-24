@@ -1,10 +1,6 @@
 export const getPronounsCount = (text: string): number => {
     let pronounsCount: number = 0;
     const splitText: Array<string> = text.trim().split(' ');
-
-    // console.log('text ', text);
-    // console.log('split ', splitText);
-
     if (
         splitText.includes('he') ||
         splitText.includes('she') ||
@@ -21,10 +17,26 @@ export const getPronounsCount = (text: string): number => {
     return pronounsCount;
 };
 
-export const getCharactersCount = (words: string[]): number => {
-    const charCount: number = words.reduce(
-        (count: number, item: string) => count + item.length,
-        0
-    );
-    return charCount;
+export const removeEmptyItems = (items: string[]) => {
+    const emptyIndex = items.findIndex((item) => item.trim() === '');
+
+    if (emptyIndex === -1) return items;
+
+    items.splice(emptyIndex, 1);
+
+    return removeEmptyItems(items);
+};
+
+export const removeLineBreaks = (items: string[]) => {
+    const breakIndex = items.findIndex((item) => item.match(/\r?\n|\r/g));
+
+    if (breakIndex === -1) return items;
+
+    const newItems = [
+        ...items.slice(0, breakIndex),
+        ...items[breakIndex].split(/\r?\n|\r/),
+        ...items.slice(breakIndex + 1, items.length),
+    ];
+
+    return removeLineBreaks(newItems);
 };

@@ -34,13 +34,18 @@ const TopContainer = () => {
 const Container = styled.div({
     background: '#d7dedd',
     width: '70vw',
-    height: '100px',
-    borderRadius: '3px',
+    padding: '10px 27px 15px',
+    marginBottom: '10px',
+    borderRadius: '3px 3px 0 0',
     display: 'flex',
     justifyContent: 'space-between',
 
     '> div': {
-        margin: '10px',
+        margin: '3px',
+
+        '> h3': {
+            lineHeight: '10px',
+        },
 
         '> span': {
             fontWeight: 400,

@@ -9,7 +9,6 @@ const TextEditor = () => {
     const handleTextAreaChange = (
         e: React.ChangeEvent<HTMLTextAreaElement>
     ) => {
-        console.log('eeee ', e.target.value)
         setTextAreaValue(e.target.value);
         setText(e.target.value);
     };
@@ -17,6 +16,7 @@ const TextEditor = () => {
     return (
         <StyledTextArea
             id="text-area"
+            placeholder="Please write here..."
             value={textAreaValue}
             onChange={handleTextAreaChange}
         />
@@ -26,9 +26,9 @@ const TextEditor = () => {
 const StyledTextArea = styled.textarea({
     background: '#d7dedd',
     width: '69vw',
-    height: '400px',
+    height: '350px',
     margin: '10px 0',
-    padding: '5px',
+    padding: '35px',
     resize: 'none',
     border: 'none',
     overflow: 'auto',
