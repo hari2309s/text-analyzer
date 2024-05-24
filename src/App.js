@@ -5,13 +5,13 @@ import BottomContainer from './components/BottomContainer.tsx';
 import React from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <TopContainer />
-      <TextEditor />
-      <BottomContainer />
-    </div>
-  );
+    return (
+        <div className="App">
+            <TopContainer />
+            <TextEditor />
+            <BottomContainer />
+        </div>
+    );
 }
 
 export default App;
