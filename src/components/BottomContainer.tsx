@@ -1,16 +1,21 @@
 import styled from '@emotion/styled/macro';
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../store/AppContext.tsx';
 
 const BottomContainer = () => {
+    const { analyzedValues } = useContext(AppContext);
+
     return (
         <Container>
             <div>
                 <h3>Average reading time</h3>
-                <span>~ 1 minute</span>
+                {analyzedValues.averageReadingTime! > 0 && (
+                    <span>{`~ ${analyzedValues.averageReadingTime} mins`}</span>
+                )}
             </div>
             <div>
                 <h3>Longest word</h3>
-                <span>Hello!</span>
+                <span>{analyzedValues.longestWord}</span>
             </div>
         </Container>
     );

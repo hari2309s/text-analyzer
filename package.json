@@ -1,5 +1,6 @@
 {
     "name": "text-analyzer",
+    "homepage": "https://hari2309s.github.io/text-analyzer/",
     "version": "0.1.0",
     "private": true,
     "dependencies": {

@@ -1,19 +1,12 @@
 import React, { createContext, useEffect, useState } from 'react';
 import {
+    getAverageReadingTime,
+    getLongestWord,
     getPronounsCount,
     removeEmptyItems,
     removeLineBreaks,
 } from '../helper.ts';
-
-interface AnalyzedValues {
-    words: number;
-    characters: number;
-    sentences: number;
-    paragraphs: number;
-    pronouns: number;
-    averageReadingTime: number;
-    longestWord: string;
-}
+import { AnalyzedValues, AppContextType } from '../types.ts';
 
 const initialAnalyzedValues: Partial<AnalyzedValues> = {
     words: 0,
@@ -23,13 +16,6 @@ const initialAnalyzedValues: Partial<AnalyzedValues> = {
     pronouns: 0,
     averageReadingTime: 0,
     longestWord: '',
-};
-
-type AppContextType = {
-    text: string;
-    setText: (text: string) => void;
-    analyzedValues: Partial<AnalyzedValues>;
-    setAnalyzedValues: (values: Partial<AnalyzedValues>) => void;
 };
 
 const initialContextValue: AppContextType = {
@@ -64,6 +50,10 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
                 paragraphs: removeEmptyItems(text.trim().split(/\r?\n|\r/))
                     .length,
                 pronouns: getPronounsCount(text),
+                longestWord: getLongestWord(text.split(' ')),
+                averageReadingTime: getAverageReadingTime(
+                    text.split(' ').length
+                ),
             }));
         } else {
             setAnalyzedValues(initialAnalyzedValues);
