@@ -22,7 +22,7 @@ const BottomContainer = () => {
 };
 
 const Container = styled.div({
-    background: '#d7dedd',
+    background: '#e8e9eb',
     width: '70vw',
     height: '90px',
     borderRadius: '3px',

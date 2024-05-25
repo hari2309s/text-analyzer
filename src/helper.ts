@@ -44,14 +44,18 @@ export const removeLineBreaks = (items: string[]) => {
     return removeLineBreaks(newItems);
 };
 
-export const getLongestWord = (items: string[]) => {
-    return items.reduce((item1: string, item2: string) => {
+export const getLongestWord = (items: string[]): string => {
+    let longestWord = '';
+
+    for (let i = 0; i < items.length; i++) {
         /* remove characters like [. , ? ! : ; ' " ) ( } {] before loooking for a longest word in the text **/
-        return item1.replace(/[,.!?:;'"{}()]/g, '').length >
-            item2.replace(/[,.!?:;'"{}()]/g, '').length
-            ? item1.replace(/[,.!?:;'"{}()]/g, '')
-            : item2.replace(/[,.!?:;'"{}()]/g, '');
-    }, '');
+        const strippedItem = items[i].trim().replace(/[,.!?:;'"]/g, '');
+
+        if (strippedItem.length > longestWord.length)
+            longestWord = strippedItem;
+    }
+
+    return longestWord;
 };
 
 export const averageReadingTimeMapping: Array<AverageReadingTime> = [
@@ -71,17 +75,10 @@ export const getAverageReadingTime = (wordsCount: number): number => {
     let averageReadingTime: number = 0;
 
     for (let i = 0; i < averageReadingTimeMapping.length - 1; i++) {
-        const diffWithItem1 = Math.abs(
-            averageReadingTimeMapping[i].words - wordsCount
-        );
-        const diffWithItem2 = Math.abs(
-            averageReadingTimeMapping[i + 1].words - wordsCount
-        );
-
-        averageReadingTime =
-            diffWithItem1 < diffWithItem2
-                ? averageReadingTimeMapping[i].averageTime
-                : averageReadingTimeMapping[i + 1].averageTime;
+        if (averageReadingTimeMapping[i].words > wordsCount) {
+            averageReadingTime = averageReadingTimeMapping[i].averageTime;
+            break;
+        }
     }
 
     return averageReadingTime;

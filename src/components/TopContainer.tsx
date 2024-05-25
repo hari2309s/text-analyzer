@@ -32,7 +32,7 @@ const TopContainer = () => {
 };
 
 const Container = styled.div({
-    background: '#d7dedd',
+    background: '#e8e9eb',
     width: '70vw',
     padding: '10px 27px 15px',
     marginBottom: '10px',

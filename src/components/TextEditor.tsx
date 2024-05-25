@@ -24,7 +24,7 @@ const TextEditor = () => {
 };
 
 const StyledTextArea = styled.textarea({
-    background: '#d7dedd',
+    background: '#e8e9eb',
     width: '69vw',
     height: '350px',
     margin: '10px 0',
