@@ -20,16 +20,26 @@ export const getPronounsCount = (text: string): number => {
     return pronounsCount;
 };
 
+/** remove empty items added on a new line breaks */
 export const removeEmptyItems = (items: string[]) => {
-    const emptyIndex = items.findIndex((item) => item.trim() === '');
+    const newItems: string[] = [...items];
 
-    if (emptyIndex === -1) return items;
+    for (let i = 0; i < items.length; i++) {
+        let emptyIndex: number = -1;
 
-    items.splice(emptyIndex, 1);
+        if (items[i].trim() === '') {
+            emptyIndex = i;
+        }
 
-    return removeEmptyItems(items);
+        if (emptyIndex > -1) {
+            newItems.splice(emptyIndex, 1);
+        }
+    }
+
+    return newItems;
 };
 
+/** remove line breaks which stitches words together */
 export const removeLineBreaks = (items: string[]) => {
     const breakIndex = items.findIndex((item) => item.match(/\r?\n|\r/g));
 
@@ -48,7 +58,7 @@ export const getLongestWord = (items: string[]): string => {
     let longestWord = '';
 
     for (let i = 0; i < items.length; i++) {
-        /* remove characters like [. , ? ! : ; ' " ) ( } {] before loooking for a longest word in the text **/
+        /** remove characters like [. , ? ! : ; ' " ) ( } {] before loooking for a longest word in the text */
         const strippedItem = items[i].trim().replace(/[,.!?:;'"]/g, '');
 
         if (strippedItem.length > longestWord.length)

@@ -45,10 +45,10 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({
                 ...values,
                 words: text.split(' ').length,
                 characters: text.length,
-                sentences: removeEmptyItems(removeLineBreaks(text.split('.')))
-                    .length,
-                paragraphs: removeEmptyItems(text.trim().split(/\r?\n|\r/))
-                    .length,
+                sentences: removeEmptyItems(text.split('.')).length,
+                paragraphs: removeEmptyItems(
+                    removeLineBreaks(text.trim().split(/\r?\n|\r/))
+                ).length,
                 pronouns: getPronounsCount(text),
                 longestWord: getLongestWord(removeLineBreaks(text.split(' '))),
                 averageReadingTime: getAverageReadingTime(

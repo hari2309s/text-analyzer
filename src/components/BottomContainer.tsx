@@ -9,9 +9,7 @@ const BottomContainer = () => {
         <Container>
             <div>
                 <h3>Average reading time</h3>
-                {analyzedValues.averageReadingTime! > 0 && (
-                    <span>{`~ ${analyzedValues.averageReadingTime} mins`}</span>
-                )}
+                <span>{`~ ${analyzedValues.averageReadingTime} mins`}</span>
             </div>
             <div>
                 <h3>Longest word</h3>
@@ -25,7 +23,7 @@ const Container = styled.div({
     background: '#e8e9eb',
     width: '70vw',
     height: '90px',
-    borderRadius: '3px',
+    borderRadius: '0 0 3px 3px',
     marginTop: '10px',
     padding: '5px 27px',
     display: 'flex',
